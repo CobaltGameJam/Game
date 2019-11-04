@@ -67,6 +67,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -112,5 +113,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ade60a05d0bbaa449866ad79d83e4832, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  moveSpeed: 2
+  bulletSpeed: 15
   ridB: {fileID: 1896111254310070105}
+  bullet: {fileID: 0}
+  StepsBetweenFire: 20
