@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class BulletScript : MonoBehaviour
 {
-    public Camera mainCamera;
+    private Camera mainCamera;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        mainCamera = Camera.main;
+
+        System.Random r = new System.Random();
+        GetComponent<MeshRenderer>().material.SetColor("_Color", new Color((float)r.NextDouble(), (float)r.NextDouble(), (float)r.NextDouble(), 1.0f));
+        // Debug.Log($"Color values: {GetComponent<MeshRenderer>().material.color}");
+
     }
 
     // Update is called once per frame
@@ -21,4 +26,12 @@ public class BulletScript : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+
+    void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log($"Passing through: {collision.collider.gameObject.name}");
+    }
+
+
 }
