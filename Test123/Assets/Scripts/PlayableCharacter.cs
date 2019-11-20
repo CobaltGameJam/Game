@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayableCharacter : MonoBehaviour
 {
     // Start is called before the first frame update
-    public float moveSpeed = 0.4f;
+
     public float bulletSpeed = 15f;
     public Rigidbody2D ridB;
     public Rigidbody2D bullet;
@@ -13,7 +13,7 @@ public class PlayableCharacter : MonoBehaviour
     public int StepsBetweenFire = 20;
 
     private int fireAlarm;
-    
+
 
     void Start()
     {
@@ -23,16 +23,13 @@ public class PlayableCharacter : MonoBehaviour
 
     void FixedUpdate()
     {
-        // Movement
-        Vector2 movingV = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-        movingV *= Time.deltaTime;
-        ridB.transform.Translate(movingV * moveSpeed);
+
 
         // Fire Weapon
         fireAlarm--;
         if(Input.GetButton("Fire1"))
         {
-            
+
             if (fireAlarm <= 0)
             {
                 Rigidbody2D clone;
@@ -53,6 +50,15 @@ public class PlayableCharacter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        FixedUpdate();
+        //var mouse_pos = Input.mousePosition;
+
+        Vector2 mouse_pos = Input.mousePosition;
+        //mouse_pos.z = 5.23; //The distance between the camera and object
+        var object_pos = Camera.main.WorldToScreenPoint(transform.position);
+        mouse_pos.x = mouse_pos.x - object_pos.x;
+        mouse_pos.y = mouse_pos.y - object_pos.y;
+        var angle = Mathf.Atan2(mouse_pos.y, mouse_pos.x) * Mathf.Rad2Deg;
+        //transform.Rotate(new Vector3(0, 0, 1), angle);
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
     }
 }
