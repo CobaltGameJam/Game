@@ -5,6 +5,8 @@ using UnityEngine;
 public class BulletScript : MonoBehaviour
 {
     private Camera mainCamera;
+    public int damage;
+    private float speed;
 
     // Start is called before the first frame update
     void Start()
@@ -27,5 +29,31 @@ public class BulletScript : MonoBehaviour
         }
     }
 
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        Wall wall = collision.collider.GetComponent<Wall>();
+        if (wall != null)
+        {
+            wall.health -= damage;
+            wall.UpdateDamageColor();
+        }
+    }
+
+
+    public void SlowDown()
+    {
+        Vector2 vel = transform.GetComponent<Rigidbody2D>().velocity;
+        vel = vel * 0.25f;
+        transform.GetComponent<Rigidbody2D>().velocity = vel;
+        Debug.Log("Slowing bullet..");
+    }
+
+    public void SpeedUp()
+    {
+        Vector2 vel = transform.GetComponent<Rigidbody2D>().velocity;
+        vel = vel * 4;
+        transform.GetComponent<Rigidbody2D>().velocity = vel;
+        Debug.Log("Speeding bullet..");
+    }
 
 }

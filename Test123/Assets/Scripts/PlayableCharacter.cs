@@ -44,8 +44,27 @@ public class PlayableCharacter : MonoBehaviour
             }
         }
 
+        if (Input.GetButtonDown("ActivateBulletTime"))
+        {
+            Transform t = transform.Find("BulletTime");
+            if (t != null)
+            {
+                t.GetComponent<MeshRenderer>().enabled = true;
+            }
+        }
 
+        if (Input.GetButtonUp("ActivateBulletTime"))
+        {
+            Transform t = transform.Find("BulletTime");
+            if (t != null)
+            {
+                t.GetComponent<MeshRenderer>().enabled = false;
+            }
+        }
     }
+
+
+
 
     // Update is called once per frame
     void Update()
