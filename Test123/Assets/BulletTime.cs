@@ -10,7 +10,8 @@ public class BulletTime : MonoBehaviour
     {
         Debug.Log("onTriggerEnter2D bulletTime");
         BulletScript bullet = collider.GetComponent<BulletScript>();
-        if (bullet != null)
+        //MeshRenderer renderer = this.GetComponent<MeshRenderer>();
+        if (bullet != null && GetComponent<Renderer>().enabled == true)
         {
             bullet.SlowDown();
             currentCollisionCount += 1;
